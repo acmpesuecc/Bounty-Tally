@@ -34,7 +34,7 @@ def get_scores():
 	res = {}
 	for i in data:
 		if i['contributor'] in res:
-			res[i['contributor']] += i['points']
+			res[i['contributor']] += int(i['points'])
 		else:
-			res[i['contributor']] = i['points']
+			res[i['contributor']] = int(i['points'])
 	return res
