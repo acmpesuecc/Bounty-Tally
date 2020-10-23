@@ -18,6 +18,11 @@ mongo = pymongo.MongoClient("mongodb+srv://"+USERNAME+":"+PASSWORD+"@cluster0.uy
 db = pymongo.database.Database(mongo, 'Hacktoberfest2020')
 
 
+@app.route('/')
+def hello():
+	return "Hi, this is the API server"
+
+
 @app.route('/tests/build_test')
 def build_test():
 	return "Passed"
@@ -29,7 +34,7 @@ def get_scores():
 	res = {}
 	for i in data:
 		if i['contributor'] in res:
-			res[i['contributor']] += i['bounty']
+			res[i['contributor']] += i['points']
 		else:
-			res[i['contributor']] = i['bounty']
+			res[i['contributor']] = i['points']
 	return res
