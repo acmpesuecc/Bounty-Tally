@@ -37,4 +37,6 @@ def get_scores():
 			res[i['contributor']] += int(i['points'])
 		else:
 			res[i['contributor']] = int(i['points'])
-	return res
+
+	sorted_res = {k: v for k, v in sorted(res.items(), key=lambda item: item[1])}
+	return sorted_res
