@@ -4,3 +4,4 @@ pymongo
 Flask-Cors
 requests
 pytest
+dnspython
