@@ -15,7 +15,7 @@ PASSWORD = os.environ.get("DB_PASSWORD")
 
 #Loads the Database and Collections
 mongo = pymongo.MongoClient("mongodb+srv://"+USERNAME+":"+PASSWORD+"@cluster0.uy3bn.mongodb.net/Hacktoberfest2020?retryWrites=true&w=majority", maxPoolSize=50, connect=True)
-db = pymongo.database.Database(mongo, 'BountyData')
+db = pymongo.database.Database(mongo, 'Hacktoberfest2020')
 
 
 @app.route('/tests/build_test')
@@ -24,5 +24,12 @@ def build_test():
 
 @app.route('/scores')
 def get_scores():
-
-	return "helo"
+	BountyData = pymongo.collection.Collection(db, 'BountyData')
+	data = json.loads(dumps(BountyData.find()))
+	res = {}
+	for i in data:
+		if i['contributor'] in res:
+			res[i['contributor']] += i['bounty']
+		else:
+			res[i['contributor']] = i['bounty']
+	return res
