@@ -29,6 +29,7 @@ def build_test():
 
 @app.route('/scores')
 def get_scores():
+	return "no scene"
 	BountyData = pymongo.collection.Collection(db, 'BountyData')
 	data = json.loads(dumps(BountyData.find()))
 	res = {}
